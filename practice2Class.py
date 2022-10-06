@@ -13,42 +13,43 @@ change the status attribute to False.
 seat number. Create accessor methods for both attributes.'''
         
 class Play:
-    def __init__(self,id,name,number_of_seats,date,status=True):
+    def __init__(self,id,name,seats,date):
         self.__id = id 
         self.__name = name
-        self.__number_of_seats = number_of_seats
+        self.__seats = seats
         self.__date = date
-        self.__status = status 
+        self.__status = 'True' 
 
 
     #create accessor methods for only name, seats, and status
     def get_name(self):
         return self.__name
     
-    def get_number_of_seats(self):
-        return self.__number_of_seats
+    def get_seats(self):
+        return self.__seats
 
     def get_status(self):
-        self.__status = True
         return self.__status
 
+    def set_seats(self,seats):
+        self.__seats = seats 
     
-    def seats_left(self):
-        return self.__number_of_seats -1
+    def seats_left(self,seats):
+        self.__seats -=1 
 
 
     #Mutator Method 
     def set_status(self):
-        self.__status = False
+        self.__status = 'False'
 
 class Booking:
 
-    def __init__(self,customer_name,seat_number):
-        self.__customer_name = customer_name
-        self.__seat_number = seat_number
+    def __init__(self,customername,seat_number):
+        self.__custname = customername
+        self.__seatnumber = seat_number
 
     def get_customer_name(self):
-        return self.__customer_name
+        return self.__custname
     
     def get_seat_number(self):
-        return self.__seat_number
+        return self.__seatnumber

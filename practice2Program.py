@@ -1,5 +1,7 @@
-import practiceClass as p
+import practice2Class as p
 import csv
+n = 0 
+
 
 
 shows = {
@@ -36,14 +38,6 @@ NOTE: Do not hard code the values to create the instance but use
 keys and values from the dictionary '''
 
 
-for play in shows: 
-    playID = shows[play]['id']
-    playName = shows[play]['name']
-    playCapacity = shows[play]['capacity']
-    playDate = shows[play]['event_date']
-
-    if shows[play]['id'] == 9587:
-        hamilton = p.Play(playID,playName,playCapacity,playDate,True)
         
         
 
@@ -66,28 +60,25 @@ infile = open('bookings.csv','r')
 csvfile = csv.reader(infile,delimiter=',')
 next(csvfile)
 
+booked = {}
+
 # use a for loop to iterate through each record in the bookings file
+for x in shows: 
+    if shows[x]['id'] == 9587:
+        example = p.Play(shows[x]['id'],shows[x]['name'],int(shows[x]['capacity']),shows[x]['event_date'])
+        for record in csvfile:
+            booked1 = p.Booking(record[1],record[2])
 
-for customer in csvfile: 
-    ConcertID = customer[0]
-    CustomerName = customer[1]
-    CustomerSeat = customer[2]
+            if record[0]==str(shows[x]['id']):
+                if example.get_seats()<=0:
+                    print('************** ERROR ****************')
+                    print('Guest Name: ', booked1.get_customer_name())
+                    print('Sorry, Show: ', example.get_name(), 'is sold out')
+                    print('**************************************') 
 
-
-
-    
-    
-
-    if ConcertID == '9587':
-        seats = p.Booking(CustomerName,CustomerSeat)
-        playCapacity -= 1
-        if playCapacity <= 0:
-            print('************** ERROR ****************')
-            print('Guest Name: ', CustomerName)
-            print('Sorry, Show: ', hamilton.get_name(), 'is sold out')
-            print('**************************************')    
-        
-        
+                else:
+                    example.seats_left(example.get_seats())
+   
 
 infile.close()
     
